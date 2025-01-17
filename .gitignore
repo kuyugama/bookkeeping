@@ -1,0 +1,10 @@
+alembic.ini
+
+# Ignore dynaconf secret files
+.secrets.*
+
+.idea
+
+.env
+
+conf

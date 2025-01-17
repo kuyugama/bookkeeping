@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "bookkeeping"
+version = "0.1.0"
+description = ""
+authors = ["kuyugama <mail.kuyugama@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = {extras = ["standard"], version = "^0.115.6"}
+asyncpg = "^0.30.0"
+sqlalchemy = "^2.0.37"
+dynaconf = "^3.2.6"
+alembic = "^1.14.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
