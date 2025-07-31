@@ -1,13 +1,16 @@
 import asyncio
-from sqlalchemy import pool
-from alembic import context
-from src.models import Base
 from logging.config import fileConfig
+
+from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
+from alembic import context
+from config import settings
+from src.models.base import Base
 
 config = context.config
+config.set_main_option("sqlalchemy.url", settings.postgresql.url)
 
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)

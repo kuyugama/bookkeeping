@@ -3,14 +3,14 @@ LABEL authors="kuyugama"
 
 ENV POETRY_VIRTUALENVS_IN_PROJECT=true
 
-RUN pip install poetry -qqq
+RUN pip install uv -qqq
 
 WORKDIR /app
 
 COPY ./pyproject.toml ./
 
-RUN poetry install --no-root --no-cache --no-interaction --quiet
+RUN uv sync
 
 COPY . ./
 
-CMD poetry run fastapi run
+CMD uv run fastapi run

@@ -82,6 +82,8 @@ def make_transaction(
         transaction=transaction,
     )
 
-    session.add_all([transaction, transfer_from, transfer_to])
+    transaction.transfers.extend([transfer_from, transfer_to])
+
+    session.add_all([transaction])
 
     return transfer_to

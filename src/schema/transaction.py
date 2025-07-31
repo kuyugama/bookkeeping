@@ -1,4 +1,6 @@
-from .model import Object, Field
+from pydantic import Field
+
+from .model import Object
 
 
 class Transaction(Object):

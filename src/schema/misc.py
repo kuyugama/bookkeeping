@@ -1,4 +1,6 @@
-from .model import Schema, Field
+from pydantic import Field
+
+from .model import Schema
 from typing import Generic, TypeVar
 
 

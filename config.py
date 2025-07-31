@@ -1,6 +1,7 @@
+import typing
 from dynaconf import Dynaconf
 
-settings = Dynaconf(
+settings: typing.Any = Dynaconf(
     envvar_prefix="DYNACONF",
     settings_files=["settings.yaml", ".secrets.yaml"],
 )

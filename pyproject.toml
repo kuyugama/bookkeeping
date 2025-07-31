@@ -1,20 +1,23 @@
-[tool.poetry]
+[project]
 name = "bookkeeping"
 version = "0.1.0"
-description = ""
-authors = ["kuyugama <mail.kuyugama@gmail.com>"]
+description = "Add your description here"
 readme = "README.md"
-package-mode = false
+requires-python = ">=3.13"
+dependencies = [
+    "alembic>=1.16.4",
+    "asyncpg>=0.30.0",
+    "dynaconf>=3.2.11",
+    "fastapi[standard]>=0.116.1",
+    "sqlalchemy>=2.0.42",
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-fastapi = {extras = ["standard"], version = "^0.115.6"}
-asyncpg = "^0.30.0"
-sqlalchemy = "^2.0.37"
-dynaconf = "^3.2.6"
-alembic = "^1.14.0"
 
+[tool.pyright]
+reportUnusedCallResult = false
+reportCallInDefaultInitializer = false
+reportAny = false
 
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.black]
+line-length=100
+

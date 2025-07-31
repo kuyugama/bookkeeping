@@ -1,7 +1,9 @@
 from typing import Annotated
-from src.util import utc_timestamp
 from datetime import datetime, timedelta
+
 from pydantic import BaseModel, ConfigDict, PlainSerializer, Field
+
+from src.util.datetime_util import utc_timestamp
 
 
 datetime_pd = Annotated[

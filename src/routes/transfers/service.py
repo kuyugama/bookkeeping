@@ -1,19 +1,23 @@
+import typing
+
 from sqlalchemy import Select
-from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from src import accounting, constants
 from src.models import Transfer, Account
 
+T = typing.TypeVar("T", bound=tuple[typing.Any, ...])
 
-def options_transfers(query: Select) -> Select:
+
+def options_transfers(query: Select[T]) -> Select[T]:
     return query.options(joinedload(Transfer.account), joinedload(Transfer.transaction))
 
 
-async def deposit_to_account(session: AsyncSession, account: Account, amount: float) -> Transfer:
+async def deposit_to_account(session: AsyncSession, account: Account, amount: float):
     account_system = await accounting.get_or_create_account(
         session,
-        f"{constants.ACCOUNT_SYSTEM}_{account.currency}",
+        f"{constants.ACCOUNT_SYSTEM}",
         constants.CREDIT,
         account.currency,
     )
@@ -24,4 +28,4 @@ async def deposit_to_account(session: AsyncSession, account: Account, amount: fl
 
     await session.commit()
 
-    return transfer
+    return transfer.transaction

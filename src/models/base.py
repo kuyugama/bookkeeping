@@ -15,7 +15,7 @@ class Base(AsyncAttrs, orm.DeclarativeBase):
 
         super().__init_subclass__(**kwargs)
 
-    id: sa.orm.Mapped[int] = orm.mapped_column(sa.BIGINT, primary_key=True, index=True)
+    id: orm.Mapped[int] = orm.mapped_column(sa.BIGINT, primary_key=True, index=True)
 
     created_at: orm.Mapped[datetime] = orm.mapped_column(default=now, index=True)
     updated_at: orm.Mapped[datetime] = orm.mapped_column(

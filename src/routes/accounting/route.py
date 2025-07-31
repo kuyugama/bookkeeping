@@ -1,14 +1,14 @@
-from src import util, constants
+from fastapi import APIRouter, Depends
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from . import service
 from src import schema
-from typing import Literal
-from fastapi import APIRouter, Depends
+from src.models import Account
+from src import util, constants
 from ..dependencies import require_page
 from src.session_holder import acquire_session
-from sqlalchemy.ext.asyncio import AsyncSession
-from .dependencies import validate_account_create, require_account
 from ..transfers.service import deposit_to_account
-from ...models import Account
+from .dependencies import validate_account_create, require_account
 
 router = APIRouter(prefix="/accounting", tags=["Рахунки"])
 
@@ -49,7 +49,7 @@ async def list_accounts(
 @router.get(
     "/{account_name}/transfers",
     summary="Отримати переведення рахунку",
-    response_model=schema.Paginated[schema.Transfer],
+    response_model=schema.Paginated[schema.FullTransfer],
     operation_id="list_transfers",
 )
 async def list_transfers(
@@ -68,7 +68,7 @@ async def list_transfers(
 @router.post(
     "/{account_name}/deposit",
     summary="Поповнити рахунок",
-    response_model=schema.Transfer,
+    response_model=schema.FullTransaction,
     operation_id="deposit_to_account",
 )
 async def deposit(
